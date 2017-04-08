@@ -6,15 +6,7 @@
  * @date 2015-10-30
  */
 
-$SERVER_NAME = $_SERVER['HTTP_HOST'];
-$environ = 'dev';
-if ($SERVER_NAME == 'test-frontend.budanmai.com') {
-    $environ = 'test';
-} else if ($SERVER_NAME == 'frontend.budanmai.com') {
-    $environ = 'product';
-}
-
-define('APP_ENVIRON', $environ);
+define('APP_ENVIRON', 'product');
 
 // 微秒。
 define('MICROTIME', microtime());
@@ -35,5 +27,5 @@ define('APP_VIEW_PATH', APP_PATH . DIRECTORY_SEPARATOR .
      $app_name .
      DIRECTORY_SEPARATOR .
      'views');
-$app = new \Yaf\Application(APP_PATH . "/conf/application.ini", $environ);
+$app = new \Yaf\Application(APP_PATH . "/conf/application.ini", APP_ENVIRON);
 $app->bootstrap()->run();

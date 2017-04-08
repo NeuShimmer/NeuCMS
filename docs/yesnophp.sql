@@ -1,7 +1,3 @@
-DROP DATABASE IF EXISTS yesnophp;
-CREATE DATABASE yesnophp DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-use yesnophp;
-
 DROP TABLE IF EXISTS ms_user;
 CREATE TABLE ms_user(
 	user_id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '用户ID',
@@ -613,7 +609,7 @@ VALUES
 (6015, '图文文章列表', 6001, 'Index', 'WeChat', 'imageTextArticleList', '', '0', '0'),
 (6016, '添加图文文章', 6001, 'Index', 'WeChat', 'addImageTextArticle', '', '0', '0'),
 (6017, '编辑图文文章', 6001, 'Index', 'WeChat', 'editImageTextArticle', '', '0', '0'),
-(6018, '删除图文文章', 6001, 'Index', 'WeChat', 'deleteImageTextArticle', '', '0', '0'),
+(6018, '删除图文文章', 6001, 'Index', 'WeChat', 'deleteImageTextArticle', '', '0', '0');
 
 
 # ------------------ 微信相关 start ------------#

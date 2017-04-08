@@ -5,16 +5,8 @@
  * @author winerQin
  * @date 2014-11-16
  */
-
-$SERVER_NAME = $_SERVER['HTTP_HOST'];
-$environ = 'dev';
-if ($SERVER_NAME == 'test-backend.budanmai.com') {
-    $environ = 'test';
-} else if ($SERVER_NAME == 'backend.budanmai.com') {
-    $environ = 'product';
-}
-
-define('APP_ENVIRON', $environ);
+xdebug_start_trace();
+define('APP_ENVIRON', 'product');
 
 // 微秒。
 define('MICROTIME', microtime());
@@ -35,5 +27,5 @@ define('APP_VIEW_PATH', APP_PATH . DIRECTORY_SEPARATOR .
      $app_name .
      DIRECTORY_SEPARATOR .
      'views');
-$app = new \Yaf\Application(APP_PATH . "/conf/application.ini", $environ);
+$app = new \Yaf\Application(APP_PATH . "/conf/application.ini", APP_ENVIRON);
 $app->bootstrap()->run();

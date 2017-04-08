@@ -100,7 +100,7 @@ class SessionHandler implements \SessionHandlerInterface {
             return $this->_cache[$session_id];
         }
         $session_data = $this->_client->get($this->_prefix . $session_id);
-        return $this->_cache[$session_id] = ($session_data === null ? '' : $session_data);
+        return $this->_cache[$session_id] = (($session_data === null || $session_data === false) ? '' : $session_data);
     }
     
     /**
