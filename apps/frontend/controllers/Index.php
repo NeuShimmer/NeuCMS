@@ -1,7 +1,7 @@
 <?php
 use common\YCore;
 /**
- * 商城首页。
+ * 首页。
  * 
  * @author winerQin
  *         @date 2015-01-28
@@ -10,7 +10,7 @@ use common\YCore;
 class IndexController extends \common\controllers\Common {
     
     /**
-     * 商城首页。
+     * 首页。
      */
     public function indexAction() {
         $this->end();
