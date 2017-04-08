@@ -5,8 +5,6 @@ require_once (APP_VIEW_PATH . DIRECTORY_SEPARATOR . 'common/header.php');
 
 <div class="subnav">
 	<div class="content-menu ib-a blue line-x">
-		<a class="add fb"
-			href="javascript:postDialog('addNews', '<?php echo YUrl::createBackendUrl('', 'News', 'add'); ?>', '添加文章', 800, 500, '', 'yes')"><em>添加文章</em></a>
 		<a href='javascript:;' class="on"><em>文章列表</em></a>
 	</div>
 </div>
