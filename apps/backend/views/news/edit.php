@@ -32,7 +32,7 @@ html {
 			</tr>
 			<tr>
 				<th width="100">文章编码：</th>
-				<td><?php echo $frontend_url; ?>article/<input type="text"
+				<td><?=isset($frontend_url)?$frontend_url:''?>article/<input type="text"
 					name="code" id="code" size="10" class="input-text"
 					value="<?php echo $detail['code']; ?>">(自定义URL)</td>
 			</tr>
@@ -155,7 +155,11 @@ $(document).ready(function(){
 //-->
 </script>
 
-
+<link href="<?=YUrl::assets('js', '/umeditor/themes/default/css/umeditor.css')?>" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="<?=YUrl::assets('js', '/umeditor/third-party/template.min.js')?>"></script>
+<script type="text/javascript" src="<?=YUrl::assets('js', '/umeditor/umeditor.config.js')?>"></script>
+<script type="text/javascript" src="<?=YUrl::assets('js', '/umeditor/umeditor.min.js')?>"></script>
+<script type="text/javascript" src="<?=YUrl::assets('js', '/umeditor/lang/zh-cn/zh-cn.js')?>"></script>
 <script>
 		window.UMEDITOR_CONFIG.imageUrl = '<?=YUrl::createBackendUrl('', 'Index', 'umUpload')?>';
 		window.UMEDITOR_CONFIG.imagePath = '';
