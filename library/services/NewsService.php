@@ -160,10 +160,10 @@ class NewsService extends BaseService {
         ];
         $rules = [
             'title'     => '标题|require:1000000|len:1000000:1:80:1',
-            'code'      => '文章编码|require:1000000|len:1000000:1:20:1|alpha_dash:1000000',
-            'intro'     => '文章简介|require:1000000|len:1000000:20:500:1',
-            'keywords'  => '文章关键词|require:1000000|len:1000000:1:100:1',
-            'source'    => '文章来源|require:1000000|len:1000000:1:50:1',
+            'code'      => '文章编码|len:1000000:0:20:1|alpha_dash:1000000',
+            'intro'     => '文章简介|len:1000000:0:500:1',
+            'keywords'  => '文章关键词|len:1000000:0:100:1',
+            'source'    => '文章来源|len:1000000:0:50:1',
             'image_url' => '文章图片|len:1000000:1:100:1',
             'content'   => '文章内容|require:1000000|len:1000000:10:50000:1',
             'display'   => '显示状态|require:1000000|integer:1000000'
@@ -210,10 +210,12 @@ class NewsService extends BaseService {
         if (empty($news_detail)) {
             YCore::exception(-1, '文章不存在或已经删除');
         }
-        $news_detail_code = $news_model->fetchOne([], ['code' => $code, 'status' => 1]);
-        if ($news_detail_code && $news_detail['code'] != $code) {
-            YCore::exception(-1, '文章编码已经被占用请更换');
-        }
+		if (!empty($code)) {
+			$news_detail_code = $news_model->fetchOne([], ['code' => $code, 'status' => 1]);
+			if ($news_detail_code && $news_detail['code'] != $code) {
+				YCore::exception(-1, '文章编码已经被占用请更换');
+			}
+		}
         $category_model = new Category();
         $cat_info = $category_model->fetchOne([], ['cat_id' => $cat_id, 'status' => 1]);
         if (empty($cat_info)) {
@@ -231,10 +233,10 @@ class NewsService extends BaseService {
         ];
         $rules = [
             'title'     => '标题|require:1000000|len:1000000:1:80:1',
-            'code'      => '文章编码|require:1000000|len:1000000:1:20:0|alpha_dash:1000000',
-            'intro'     => '文章简介|require:1000000|len:1000000:20:500:1',
-            'keywords'  => '文章关键词|require:1000000|len:1000000:1:100:1',
-            'source'    => '文章来源|require:1000000|len:1000000:1:50:1',
+            'code'      => '文章编码|len:1000000:0:20:1|alpha_dash:1000000',
+            'intro'     => '文章简介|len:1000000:0:500:1',
+            'keywords'  => '文章关键词|len:1000000:0:100:1',
+            'source'    => '文章来源|len:1000000:0:50:1',
             'image_url' => '文章图片|len:1000000:1:100:1',
             'content'   => '文章内容|require:1000000|len:1000000:10:50000:1',
             'display'   => '显示状态|require:1000000|integer:1000000'
