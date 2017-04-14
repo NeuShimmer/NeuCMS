@@ -145,6 +145,9 @@ class NewsService extends BaseService {
         }
 		$news_model = new News();
 		if (!empty($code)) {
+			if (is_numeric($code)) {
+				YCore::exception(-1, '文章编码不能为纯数字');
+			}
 			$news_detail = $news_model->fetchOne([], ['code' => $code, 'status' => 1]);
 			if (!empty($news_detail)) {
 				YCore::exception(-1, '文章编码已经存在请更换');
@@ -213,6 +216,9 @@ class NewsService extends BaseService {
             YCore::exception(-1, '文章不存在或已经删除');
         }
 		if (!empty($code)) {
+			if (is_numeric($code)) {
+				YCore::exception(-1, '文章编码不能为纯数字');
+			}
 			$news_detail_code = $news_model->fetchOne([], ['code' => $code, 'status' => 1]);
 			if ($news_detail_code && $news_detail['code'] != $code) {
 				YCore::exception(-1, '文章编码已经被占用请更换');
