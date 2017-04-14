@@ -85,7 +85,8 @@ $(document).ready(function(){
             data: $('form').eq(0).serialize(),
             success: function(data) {
                 if (data.errcode == 0) {
-                	top.dialog.getCurrent().close({"refresh" : 1});
+                	alert('添加成功');
+					window.location.reload();
                 } else {
                 	dialogTips(data.errmsg, 3);
                 }

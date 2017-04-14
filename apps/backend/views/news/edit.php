@@ -97,7 +97,8 @@ $(document).ready(function(){
             data: $('form').eq(0).serialize(),
             success: function(data) {
                 if (data.errcode == 0) {
-                	top.dialog.getCurrent().close({"refresh" : 1});
+                	alert('更新成功');
+					window.location.reload();
                 } else {
                 	dialogTips(data.errmsg, 3);
                 }
@@ -155,14 +156,10 @@ $(document).ready(function(){
 </script>
 
 
-<script charset="utf-8"
-	src="<?php echo YUrl::assets('js', '/kindeditor/kindeditor-all-min.js') ?>"></script>
-<script charset="utf-8"
-	src="<?php echo YUrl::assets('js', '/kindeditor/lang/zh-CN.js') ?>"></script>
 <script>
-        KindEditor.ready(function(K) {
-                window.editor = K.create('#editor_id');
-        });
+		window.UMEDITOR_CONFIG.imageUrl = '<?=YUrl::createBackendUrl('', 'Index', 'umUpload')?>';
+		window.UMEDITOR_CONFIG.imagePath = '';
+        UM.getEditor('editor_id');
 </script>
 
 </body>
