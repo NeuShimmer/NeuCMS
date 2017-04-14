@@ -51,6 +51,7 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract {
     
     /**
      * 初始化session到reids中。
+	 * 前台页面不初始化Session
      * --------------------------------------
      * 1、实现SessionHandlerInterface接口，将session保存到reids中。
      * 2、重新开启session，让默认的session切换到自已的session接口。
@@ -61,6 +62,9 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract {
      * --------------------------------------
      */
     public function _initSession() {
+		if (defined('APP_IS_FRONT')) {
+			return;
+		}
         $cache = YCore::getCache();
         // 为了防止WEB集群下SESSION冲撞问题，特此设置前缀区分。
         $prefix = 'sess_' . ip2long($_SERVER['SERVER_ADDR']) . '_';

@@ -8,6 +8,8 @@
 
 define('APP_ENVIRON', 'product');
 
+define('APP_IS_FRONT', 1);
+
 // 微秒。
 define('MICROTIME', microtime());
 
