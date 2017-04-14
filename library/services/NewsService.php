@@ -143,11 +143,13 @@ class NewsService extends BaseService {
         if (empty($cat_info)) {
             YCore::exception(-1, '分类不存在或已经删除');
         }
-        $news_model = new News();
-        $news_detail = $news_model->fetchOne([], ['code' => $code, 'status' => 1]);
-        if (!empty($news_detail)) {
-            YCore::exception(-1, '文章编码已经存在请更换');
-        }
+		$news_model = new News();
+		if (!empty($code)) {
+			$news_detail = $news_model->fetchOne([], ['code' => $code, 'status' => 1]);
+			if (!empty($news_detail)) {
+				YCore::exception(-1, '文章编码已经存在请更换');
+			}
+		}
         $data = [
             'title'     => $title,
             'code'      => $code,
