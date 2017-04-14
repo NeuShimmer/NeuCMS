@@ -57,6 +57,20 @@ class IndexController extends \common\controllers\Admin {
         $this->json(true, '上传成功', $result);
         $this->end();
     }
+    public function umUploadAction() {
+        header("Access-Control-Allow-Origin: *");
+		$key = key($_FILES);
+        $result = UploadService::uploadImage(1, $this->admin_id, 'voucher', 2);
+        echo json_encode([
+            "originalName" => $_FILES[$key]['name'],
+            "name" => $_FILES[$key]['name'],
+            "url" => $result[0]['image_url'] ,
+            "size" => $_FILES[$key]['size'],
+            "type" => pathinfo($_FILES[$key]['name'], PATHINFO_EXTENSION),
+            "state" => ($_FILES[$key]['error'] == 0 ? 'SUCCESS' : '未知错误')
+		]);
+        $this->end();
+    }
     
     /**
      * 生成首页。

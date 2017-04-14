@@ -38,7 +38,7 @@ html {
 			</tr>
 			<tr>
 				<th width="100">文章简介：</th>
-				<td><textarea name="intro" id="intro" style="width: 600px;" rows="5"
+				<td><textarea name="intro" id="intro" style="width: 90%;" rows="5"
 						cols="50"></textarea></td>
 			</tr>
 			<tr>
@@ -61,7 +61,7 @@ html {
 			</tr>
 			<tr>
 				<th width="100">文章内容：</th>
-				<td><textarea name="content" id="editor_id" style="width: 600px;"
+				<td><textarea name="content" id="editor_id" style="width: 90%;"
 						rows="5" cols="50"></textarea></td>
 			</tr>
 			<tr>
@@ -141,16 +141,15 @@ $(document).ready(function(){
 
 //-->
 </script>
-
-
-<script charset="utf-8"
-	src="<?php echo YUrl::assets('js', '/kindeditor/kindeditor-all-min.js') ?>"></script>
-<script charset="utf-8"
-	src="<?php echo YUrl::assets('js', '/kindeditor/lang/zh-CN.js') ?>"></script>
+<link href="<?=YUrl::assets('js', '/umeditor/themes/default/css/umeditor.css')?>" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="<?=YUrl::assets('js', '/umeditor/third-party/template.min.js')?>"></script>
+<script type="text/javascript" src="<?=YUrl::assets('js', '/umeditor/umeditor.config.js')?>"></script>
+<script type="text/javascript" src="<?=YUrl::assets('js', '/umeditor/umeditor.min.js')?>"></script>
+<script type="text/javascript" src="<?=YUrl::assets('js', '/umeditor/lang/zh-cn/zh-cn.js')?>"></script>
 <script>
-        KindEditor.ready(function(K) {
-                window.editor = K.create('#editor_id');
-        });
+		window.UMEDITOR_CONFIG.imageUrl = '<?=YUrl::createBackendUrl('', 'Index', 'umUpload')?>';
+		window.UMEDITOR_CONFIG.imagePath = '';
+        UM.getEditor('editor_id');
 </script>
 
 </body>
