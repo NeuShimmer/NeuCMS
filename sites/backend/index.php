@@ -5,7 +5,7 @@
  * @author winerQin
  * @date 2014-11-16
  */
-xdebug_start_trace();
+
 define('APP_ENVIRON', 'product');
 
 // 微秒。
