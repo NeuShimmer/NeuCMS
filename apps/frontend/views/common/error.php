@@ -38,7 +38,7 @@ a:hover, a:active {
 }
 
 .showMsg h5 {
-	background-image: url(http://frontend.yesnophp.com/images/msg.png);
+	background-image: url(<?=YUrl::assets('image', '/backend/msg.png')?>);
 	background-repeat: no-repeat;
 	color: #fff;
 	padding-left: 35px;
@@ -67,7 +67,7 @@ a:hover, a:active {
 }
 
 .showMsg .ok, .showMsg .guery {
-	background: url(http://frontend.yesnophp.com/images/msg_bg.png)
+	background: url(<?=YUrl::assets('image', '/backend/msg_bg.png')?>)
 		no-repeat 0px -560px;
 }
 
@@ -77,9 +77,9 @@ a:hover, a:active {
 -->
 </style>
 <script type="text/javaScript"
-	src="http://frontend.yesnophp.com/js/jquery.min.js"></script>
+	src="<?php echo YUrl::assets('js', '/backend/jquery.min.js'); ?>"></script>
 <script language="JavaScript"
-	src="http://frontend.yesnophp.com/js/backend_common.js"></script>
+	src="<?php echo YUrl::assets('js', '/backend/backend_common.js'); ?>"></script>
 </head>
 <body>
 	<div class="showMsg" style="text-align: center">
