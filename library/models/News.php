@@ -1,8 +1,8 @@
 <?php
 /**
  * 文章表。
- * @author winerQin
- * @date 2016-03-27
+ * @author ShuangYa
+ * @date 2017-4-28
  */
 
 namespace models;

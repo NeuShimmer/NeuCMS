@@ -1,8 +1,8 @@
 <?php
 /**
  * 文章管理。
- * @author winerQin
- * @date 2016-03-28
+ * @author ShuangYa
+ * @date 2017-4-28
  */
 namespace services;
 
