@@ -37,7 +37,7 @@ class NewsController extends \common\controllers\Common {
         $cat = $this->getInt('cat');
         $page = $this->getInt('page', 1);
 		$cat_info = CategoryService::getCategoryDetail($cat);
-        $list = NewsService::getNewsList('', '', '', '', $page, 20, $cat, 1);
+        $list = NewsService::getNewsList('', '', '', '', $page, 20, $cat, 1, 1);
         $paginator = new Paginator($list['total'], 20);
         $page_html = $paginator->backendPageShow();
         $this->_view->assign('page_html', $page_html);

@@ -28,7 +28,7 @@ class NewsService extends BaseService {
 	 * @param number $cat_include_child 是否包含子分类
      * @return array
      */
-    public static function getNewsList($title = '', $admin_name = '', $starttime = '', $endtime = '', $page = 1, $count = 20, $cat_id = NULL, $cat_include_child = 1) {
+    public static function getNewsList($title = '', $admin_name = '', $starttime = '', $endtime = '', $page = 1, $count = 20, $cat_id = NULL, $cat_include_child = 1, $display = 0) {
         if (strlen($starttime) > 0 && !Validator::is_date($starttime, 'Y-m-d H:i:s')) {
             YCore::exception(-1, '开始时间格式不对');
         }
@@ -45,7 +45,7 @@ class NewsService extends BaseService {
             $admin_id = $admin ? $admin['admin_id'] : 0;
         }
         $news_model = new News();
-        return $news_model->getList($title, $admin_id, $starttime, $endtime, $page, $count, $cat_id, $cat_include_child);
+        return $news_model->getList($title, $admin_id, $starttime, $endtime, $page, $count, $cat_id, $cat_include_child, $display);
     }
 
     /**

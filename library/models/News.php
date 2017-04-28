@@ -29,7 +29,7 @@ class News extends DbBase {
 	 * @param number $cat_include_child 是否包含子分类
      * @return array
      */
-    public function getList($title = '', $admin_id = -1, $starttime = '', $endtime = '', $page, $count, $cat_id = NULL, $cat_include_child = 1) {
+    public function getList($title = '', $admin_id = -1, $starttime = '', $endtime = '', $page, $count, $cat_id = NULL, $cat_include_child = 1, $display = 0) {
         $offset  = $this->getPaginationOffset($page, $count);
         $columns = ' * ';
         $where   = ' WHERE status = :status ';
@@ -66,6 +66,9 @@ class News extends DbBase {
 				$where .= 'AND cat_id = :cat_id ';
             	$params[':cat_id'] = $cat_id;
 			}
+		}
+		if ($display) {
+			$where .= 'AND display = 1 ';
 		}
         $order_by = ' ORDER BY news_id DESC ';
         $sql = "SELECT COUNT(1) AS count FROM {$this->_table_name} {$where}";
