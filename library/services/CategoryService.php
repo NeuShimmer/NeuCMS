@@ -28,14 +28,14 @@ class CategoryService extends BaseService {
      * @param boolean $is_filter 是否过滤无用字段。
      * @return array
      */
-    public static function getCategoryList($parentid = 0, $cat_type = self::CAT_NEWS, $is_filter = false) {
+    public static function getCategoryList($parentid = 0, $cat_type = self::CAT_NEWS, $is_filter = false, $is_hide = true) {
         $category_model = new Category();
-        $category_list = $category_model->getByParentToCategory($parentid, $cat_type, true, $is_filter);
+        $category_list = $category_model->getByParentToCategory($parentid, $cat_type, $is_hide, $is_filter);
         if (empty($category_list)) {
             return $category_list;
         } else {
             foreach ($category_list as $key => $menu) {
-                $category_list[$key]['sub'] = self::getCategoryList($menu['cat_id'], $cat_type, $is_filter);
+                $category_list[$key]['sub'] = self::getCategoryList($menu['cat_id'], $cat_type, $is_filter, $is_hide);
             }
             return $category_list;
         }
