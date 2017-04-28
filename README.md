@@ -1,109 +1,56 @@
-### YesnoPHP 框架安装指南###
+# NeuCMS
 
-首先，我要感谢大家使用 YesnoPHP 框架。如果你在使用本框架过程中遇到什么问题可以通过 issues 提问。本人不对使用该源码带来的 BUG 或法律风险承担任何责任。你可以免费使用该源码到任何你想用的项目中。不用支付任何费用给本人。
+NeuCMS为微光网络工作室基于Yesno开发的一套CMS系统
 
-YesnoPHP 使用了 PHPCMS v9 管理后台模板，部分功能设计参考了它的设计。所以，本项目只能作为学习使用。如果你要使用在项目中，请自行承担带来的法律风险。
+## 环境需求
 
-YesnoPHP 框架是基于 PHP 的 Yaf 扩展开发的应用。简单的说，就是使用 Yaf 开发了一个网站。网站中涉及到的常用功能都已经实现了。一些不常用的功能，可以通过该项目源码自己增加。如果你对已经实现的功能不满意或不能满足自己的项目需求，也可以很容易地进行更改。
+1. PHP 7+
 
+2. Redis 3+
 
-管理后台的功能如下：
+3. MySQL
 
-1. 管理员模块。管理员增删改查。角色分配、角色的权限管理。
+4. Yaf扩展（[下载](http://pecl.php.net/package/yaf)）、Redis扩展（[下载](http://pecl.php.net/package/redis)）
 
-2. 配置管理。系统中使用到的配置都可以通过它来管理。并且使用了缓存加快配置的读取。
+## 安装
 
-3. 字典管理。所谓字典就是那些比如银行列表、状态说明等数据。通过字典来进行管理。
+1. 修改conf/application.ini，将数据库信息进行修改
 
-4. 菜单管理。管理后台菜单管理。
+2. 导入`docs`目录下的SQL文件
 
-5. 敏感词管理。可以通过设置敏感词之后，在想要使用的地方调用过滤用户输入。
+3. 配置nginx或Apache，例如：（请根据自己实际需要修改）
 
-6. 日志管理。系统中凡是PHP可以捕捉的错误或异常都可以拦截并记录到日志模块中供管理员查看。
+```
+server {
+	listen 80;
+	server_name backend.neucms;
+	root	 /www/cms/sites/backend;
+	location / {
+		index		index.php index.html index.htm;
+	}
+	if (!-f $request_filename) {
+		rewrite ^/(.*)$ /index.php last;
+	}
+	location ~ \.php$ {
+		include	php-cgi.conf;
+	}
+}
+```
 
-7. 文件管理。查看或删除用户上传的文件。
+## 关于多域名的配置
 
-8. 分类管理。广告分类、文章分类、商品分类。管理你想要管理的所有分类。
+NeuCMS将各个功能设计为单独的模块。假设你有一个域名为example.com
 
-9. 文章管理。
+1. 账户中心：account.example.com 对应`sites/account`
 
-10. 广告管理。广告位置、广告列表等数据管理。
+2. API接口：api.example.com 对应`sites/api`
 
-11. 友情链接管理。设定友情链接分类，轻松维护你的友情链接。
+3. 前台：www.example.com 对应`sites/frontend`
 
-12. 用户管理。轻松管理你网站的用户。增删改。
+4. 管理后台：backend.example.com 对应`sites/backend`
 
+5. 静态资源：statics.example.com 对应`statics`
 
-API模块：
+6. 图片资源：files.example.com 对应`upload`
 
-已经实现了API的验证与数据调用。如果你想调用具体的数据，可以直接使用 yesnophp\library\services 中定义的方法。所有的业务都已经封装到了 services 中。大家可以根据需要自己实现具体的API接口。源码中已经提供了可用的示例。直接复制粘贴即可使用。
-
-
-用户中心：
-
-关于用户的操作全部都在 yesnophp\library\services 中。登录、注册、修改密码、权限判断都已经完整实现。还可以限制用户单点登录。即同一时间只能允许同一个人登录，多个用户登录会导致后登录的挤掉前面登录的人。当然，页面实现还没有做。
-
-
-前台：
-
-这个需要自己去实现。反正数据库摆在那儿。该有的模块都有。所以，大家自己根据自己业务设计吧。
-
-
-#### 一、准备工作####
-
-1. PHP 版 5.6 或以上。原则上代码未使用特殊的语法特性以及不推荐的写法。所以，应该能运行在PHP5.4+。
-
-2. 你得有一个 Redis 版本 3+ 以上的缓存服务器。它用来存储 session、数据缓存、队列等操作。
-
-3. 你的 PHP 一定要安装PHP的 Yaf、Redis 扩展。这些两个PHP扩展都有 windows 和 Linux 版本。
-
-Yaf 扩展下载地址：[http://pecl.php.net/package/yaf](http://pecl.php.net/package/yaf)
-
-Redis 扩展下载地址：http://pecl.php.net/package/redis
-
-*注意* ：Yaf 提供了 PHP5.x 与 PHP 7.x 两个版本的扩展，版本号 2+ 对应 PHP5.x，3+ 对应 PHP7.x。Redis扩展直接下载最新最稳定的那个版本就可以了。
-
-
-#### 二、数据库####
-
-在源代码目录 yesnophp\docs 以 .sql 结尾的文件，都是 YesnoPHP 框架用到的数据库文件。打开yesnophp.sql 文件，可以看到开头的几行：
-
-````sql
-DROP DATABASE IF EXISTS yesnophp;
-CREATE DATABASE yesnophp DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-use yesnophp;
-````
-
-通过如上几行代码在数据库中通过命令行创建名为 yesnophp 的数据库。当然，你也可以通过其他可视货的 MySQL 客户端工具创建数据库。
-
-然后，我们导入 yesnophp.sql 文件剩余的代码创建表与导入初始化数据。
-
-再然后，我们导入 ms_district.sql 导入地区（省市区县街道）表。
-
-
-#### 三、域名映射到不同的应用####
-
-由于 YesnoPHP 框架在设计之初就是奔着开发中大型项目（有点吹牛嫌疑）设计的。所以，如下应用或功能模块被设计成各自一个域名访问。假设你有一个域名为 yesnophp.com
-
-1. 账户中心：推荐的域名是 account.yesnophp.com
-
-2. API接口：推荐的域名是api.yesnophp.com
-
-3. 前台：推荐域名是 www.yesnophp.com 或 frontend.yesnophp.com
-
-4. 管理后台：推荐域名是 backend.yesnophp.com 或 admin.yesnophp.com
-
-5. 静态资源：推荐域名是 statics.yesnophp.com
-
-6. 图片资源：推荐域名是files.yesnophp.com
-
-
-在 nginx 或 apache 中做域名映射的时候，应用映射到目录 yesnophp\sites 对应的应用上。通过名字可以很容易判断。
-
-打开数据库中的 ms_config 表，把里面涉及到域名的地方都改成上面你自己定义的域名。
-
-#### 四、配置####
-
-配置文件 yesnophp\conf\application.ini。只需要修改里面的数据库与redis的信息即可。其中 authkey 配置很重要，很多地方都需要它。
-
-通过如此几步，你现在可以运行 YesnoPHP 框架了。
+配置好后，打开数据库中的 ms_config 表，把里面涉及到域名的地方都改成上面你自己定义的域名。
