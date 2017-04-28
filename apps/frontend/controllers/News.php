@@ -28,4 +28,19 @@ class NewsController extends \common\controllers\Common {
 		}
 		$this->_view->assign('detail', $detail);
     }
+	/**
+	 * 列表
+	 */
+	public function listAction() {
+        $page = $this->getInt(YCore::appconfig('pager'), 1);
+        $list = NewsService::getNewsList($title, $admin_name, $starttime, $endtime, $page, 20);
+        $paginator = new Paginator($list['total'], 20);
+        $page_html = $paginator->backendPageShow();
+        $this->_view->assign('page_html', $page_html);
+        $this->_view->assign('list', $list['list']);
+        $this->_view->assign('admin_name', $admin_name);
+        $this->_view->assign('title', $title);
+        $this->_view->assign('starttime', $starttime);
+        $this->_view->assign('endtime', $endtime);
+	}
 }

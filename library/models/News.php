@@ -25,9 +25,11 @@ class News extends DbBase {
      * @param string $endtime 截止时间。
      * @param number $page 分页页码。
      * @param number $count 每页显示记录条数。
+	 * @param number $cat_id 分类ID
+	 * @param number $cat_include_child 是否包含子分类
      * @return array
      */
-    public function getList($title = '', $admin_id = -1, $starttime = '', $endtime = '', $page, $count) {
+    public function getList($title = '', $admin_id = -1, $starttime = '', $endtime = '', $page, $count, $cat_id = NULL, $cat_include_child = 1) {
         $offset  = $this->getPaginationOffset($page, $count);
         $columns = ' * ';
         $where   = ' WHERE status = :status ';
@@ -50,6 +52,21 @@ class News extends DbBase {
             $where .= ' AND created_by = :admin_id ';
             $params[':admin_id'] = $admin_id;
         }
+		if ($cat_id !== NULL) {
+			if ($cat_include_child) {
+				$ids = [$cat_id];
+				$category_model = new Category();
+				$childs = $category_model->getByParentToCategory($cat_id, 1, FALSE, TRUE);
+				foreach ($childs as $v) {
+					$ids[] = $v['cat_id'];
+				}
+				array_unique($ids);
+				$where .= 'AND cat_id IN (' . implode(', ', $ids) . ') ';
+			} else {
+				$where .= 'AND cat_id = :cat_id ';
+            	$params[':cat_id'] = $cat_id;
+			}
+		}
         $order_by = ' ORDER BY news_id DESC ';
         $sql = "SELECT COUNT(1) AS count FROM {$this->_table_name} {$where}";
         $sth = $this->link->prepare($sql);
