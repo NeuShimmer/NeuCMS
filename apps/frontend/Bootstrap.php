@@ -17,6 +17,8 @@ class Bootstrap extends \common\Bootstrap {
     public function _initRoute(\Yaf\Dispatcher $dispatcher) {
         $config = \Yaf\Application::app()->getConfig();
         $router = \Yaf\Dispatcher::getInstance()->getRouter();
-        $router->addConfig($config->routes);
+        $router->addRoute('news_detail', new \Yaf\Route\Rewrite('/archives/:code', ['controller' => 'News', 'action' => 'detail']));
+        $router->addRoute('news_list', new \Yaf\Route\Rewrite('/list/:cat', ['controller' => 'News', 'action' => 'list']));
+        $router->addRoute('news_list_page', new \Yaf\Route\Rewrite('/list/:cat/:page', ['controller' => 'News', 'action' => 'list']));
     }
 }

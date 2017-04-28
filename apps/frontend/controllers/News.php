@@ -8,7 +8,9 @@ use common\YCore;
  */
 
 use common\YUrl;
+use services\CategoryService;
 use services\NewsService;
+use winer\Paginator;
 class NewsController extends \common\controllers\Common {
     
     /**
@@ -32,15 +34,14 @@ class NewsController extends \common\controllers\Common {
 	 * 列表
 	 */
 	public function listAction() {
-        $page = $this->getInt(YCore::appconfig('pager'), 1);
-        $list = NewsService::getNewsList($title, $admin_name, $starttime, $endtime, $page, 20);
+        $cat = $this->getInt('cat');
+        $page = $this->getInt('page', 1);
+		$cat_info = CategoryService::getCategoryDetail($cat);
+        $list = NewsService::getNewsList('', '', '', '', $page, 20, $cat, 1);
         $paginator = new Paginator($list['total'], 20);
         $page_html = $paginator->backendPageShow();
         $this->_view->assign('page_html', $page_html);
-        $this->_view->assign('list', $list['list']);
-        $this->_view->assign('admin_name', $admin_name);
-        $this->_view->assign('title', $title);
-        $this->_view->assign('starttime', $starttime);
-        $this->_view->assign('endtime', $endtime);
+        $this->_view->assign('list', $list);
+        $this->_view->assign('cat', $cat_info);
 	}
 }
