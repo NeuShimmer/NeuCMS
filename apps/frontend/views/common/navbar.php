@@ -1,6 +1,10 @@
 <?php
+use common\YCore;
 use common\YUrl;
 use services\CategoryService;
+if (!isset($_site_name)) {
+	$_site_name = YCore::config('site_name');
+}
 $_cat_list = CategoryService::getCategoryList(0, CategoryService::CAT_NEWS, false, false);
 ?>
 	<nav class="navbar navbar-default">
@@ -12,7 +16,7 @@ $_cat_list = CategoryService::getCategoryList(0, CategoryService::CAT_NEWS, fals
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">NeuCMS</a>
+				<a class="navbar-brand" href="#"><?=$_site_name ?></a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
