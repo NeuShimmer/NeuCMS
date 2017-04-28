@@ -95,7 +95,7 @@ a:hover, a:active {
 	<div class="showMsg" style="text-align: center">
 		<h5>提示信息</h5>
 		<div class="content guery"
-			style="display: inline-block; display: -moz-inline-stack; zoom: 1; *display: inline; max-width: 330px"><?php echo $message; ?></div>
+			style="display: inline-block; zoom: 1; *display: inline; max-width: 330px"><?php echo $message; ?></div>
 		<div class="bottom">
 			<a href="javascript:history.back();">[点这里返回上一页]</a>
 		</div>

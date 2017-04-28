@@ -20,7 +20,7 @@ class PublicController extends \common\controllers\Guest {
             $password = $this->getString('password', '');
             AdminService::login($username, $password);
             $url = YUrl::createBackendUrl('', 'Index', 'index');
-            $this->success('登录成功', $url, 1);
+            $this->success('<p>登录成功</p><p><a href="' . $url . '">如果页面长时间没有跳转，请点击这里继续</a></p>', $url, 1);
         }
     }
     
