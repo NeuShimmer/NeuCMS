@@ -8,7 +8,7 @@ use common\YUrl;
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
 
-		<title>Yesno - 后台管理中心</title>
+		<title>NeuCMS - 后台管理中心</title>
 		<link href="<?php echo YUrl::assets('css', '/backend/reset.css'); ?>"
 			rel="stylesheet" type="text/css">
 			<link
@@ -170,11 +170,11 @@ use common\YUrl;
 
 	<div class="header" style="width: auto;">
 		<div class="logo lf">
-			<a href="" target="_blank"><span class="invisible">Yesno内容管理系统</span></a>
+			<a href="" target="_blank"><span class="invisible">NeuCMS</span></a>
 		</div>
 		<div class="rt-col">
 			<div class="tab_style white cut_line text-r">
-				<a href="" target="_blank">Yesno</a>
+				<a href="" target="_blank">NeuCMS</a>
 				<ul id="Skin">
 					<li class="s1 styleswitch" rel="styles1"></li>
 					<li class="s2 styleswitch" rel="styles2"></li>

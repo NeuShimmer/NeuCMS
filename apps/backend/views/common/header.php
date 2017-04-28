@@ -7,7 +7,7 @@ use common\YUrl;
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
-	<title>Yesno - 后台管理中心</title> <!-- 管理后台主题样式 start -->
+	<title>NeuCMS - 后台管理中心</title> <!-- 管理后台主题样式 start -->
 	<link href="<?php echo YUrl::assets('css', '/backend/reset.css'); ?>"
 		rel="stylesheet" type="text/css">
 		<link
