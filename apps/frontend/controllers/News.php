@@ -28,7 +28,9 @@ class NewsController extends \common\controllers\Common {
 		if ($detail['display'] != 1) {
 			$this->error('文章不存在或已经删除', YUrl::createFrontendUrl('Index', 'Index', 'Index'));
 		}
+		$cat_info = CategoryService::getCategoryDetail($detail['cat_id']);
 		$this->_view->assign('detail', $detail);
+		$this->_view->assign('cat', $cat_info);
     }
 	/**
 	 * 列表
