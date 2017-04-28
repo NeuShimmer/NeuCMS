@@ -212,7 +212,7 @@ CREATE TABLE ms_config(
 ) ENGINE = InnoDB DEFAULT CHARSET UTF8 COMMENT '系统配置表';
 
 INSERT INTO `ms_config` VALUES ('1', '排他登录', 'is_unique_login', '1', '1是、0否。即同一时间账号只能在一个地方登录。不允许账号在其他地方登录。', '1', '1', unix_timestamp(now()), '0', '0');
-INSERT INTO `ms_config` VALUES ('2', '网站名称', 'site_name', '不单麦', '', '1', '1', '1474353609', '0', '0');
+INSERT INTO `ms_config` VALUES ('2', '网站名称', 'site_name', 'NeuCMS', '网站名称', '1', '1', '1474353609', '0', '0');
 INSERT INTO `ms_config` VALUES ('3', 'PC登录超时时间(分钟)', 'pc_logout_time', '30', '登录超时时间。距离上次最后操作时间大于当前指定时间分钟内将登录超时并退出登录', '1', '1', unix_timestamp(now()), '0', '0');
 INSERT INTO `ms_config` VALUES ('4', '管理后台域名', 'backend_domain_name', 'http://dev-backend.yesnophp.com/', '涉及到网站页面或资源的链接地址', '1', '1', unix_timestamp(now()), '0', '0');
 INSERT INTO `ms_config` VALUES ('5', '前台域名', 'frontend_domain_name', 'http://dev-frontend.yesnophp.com/', '涉及到网站页面或资源的链接地址', '1', '1', unix_timestamp(now()), '0', '0');
