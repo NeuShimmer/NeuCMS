@@ -41,16 +41,14 @@ server {
 
 NeuCMS将各个功能设计为单独的模块。假设你有一个域名为example.com
 
-1. 账户中心：account.example.com 对应`sites/account`
+1. API接口：api.example.com 对应`sites/api`
 
-2. API接口：api.example.com 对应`sites/api`
+2. 前台：www.example.com 对应`sites/frontend`
 
-3. 前台：www.example.com 对应`sites/frontend`
+3. 管理后台：backend.example.com 对应`sites/backend`
 
-4. 管理后台：backend.example.com 对应`sites/backend`
+4. 静态资源：statics.example.com 对应`statics`
 
-5. 静态资源：statics.example.com 对应`statics`
-
-6. 图片资源：files.example.com 对应`upload`
+5. 图片资源：files.example.com 对应`upload`
 
 配置好后，打开数据库中的 ms_config 表，把里面涉及到域名的地方都改成上面你自己定义的域名。
