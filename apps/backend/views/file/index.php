@@ -111,7 +111,7 @@ Calendar.setup({
 						<td align="left"><?php echo $item['file_md5']; ?></td>
 						<td align="left"><?php echo $item['user_type_label']; ?></td>
 						<td align="left"><?php echo $item['user_name']; ?></td>
-						<td align="left"><?php echo date('Y-m-d H:i:s', $item['created_time']); ?></td>
+						<td align="left"><?php echo is_numeric($item['created_time']) ? date('Y-m-d H:i:s', $item['created_time']) : $item['created_time']; ?></td>
 						<td align="center"><a href="###"
 							onclick="deleteDialog('deleteFile', '<?php echo YUrl::createBackendUrl('', 'File', 'delete', ['file_id' => $item['file_id']]); ?>', '图片')"
 							title="删除">删除</a></td>
