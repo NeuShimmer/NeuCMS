@@ -11,8 +11,8 @@ html {
 </style>
 
 <div class="common-form">
-	<form name="myform" id="myform"
-		action="<?php echo YUrl::createBackendUrl('', 'Page', 'navbarAdd'); ?>" method="post">
+	<form name="myform" id="myform" action="<?php echo YUrl::createBackendUrl('', 'Page', 'navbarEdit'); ?>" method="post">
+		<input type="hidden" name="id" value="<?=$nav['id']?>">
 		<table width="100%" class="table_form contentWrap">
 			<tr>
 				<th width="120">上级菜单：</th>
