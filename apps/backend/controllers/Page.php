@@ -9,7 +9,17 @@ use common\YCore;
 use services\NavbarService;
 
 class PageController extends \common\controllers\Admin {
-    
+    /**
+	 * 列出所有特殊页面
+	 */
+	public function pagesAction() {
+        $code = YCore::appconfig('connection.code');
+        $frontend_home_page_url = YUrl::createFrontendUrl('', 'Index', 'getPages', [
+                'code' => $code 
+        ]);
+        $ret = json_decode(YCore::pc_file_get_contents($frontend_home_page_url, 10), 1);
+		$this->_view->assign('list', $ret);
+	}
     /**
      * 导航栏列表。
      */

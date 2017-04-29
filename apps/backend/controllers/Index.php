@@ -76,7 +76,7 @@ class IndexController extends \common\controllers\Admin {
      * 生成首页。
      */
     public function createHomePageAction() {
-        $code = YCore::appconfig('create.home.page.code');
+        $code = YCore::appconfig('connection.code');
         $frontend_home_page_url = YUrl::createFrontendUrl('', 'Index', 'Index', [
                 'code' => $code 
         ]);
