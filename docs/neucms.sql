@@ -441,6 +441,19 @@ CREATE TABLE ms_category(
 	KEY(cat_code)
 ) ENGINE = InnoDB DEFAULT CHARSET UTF8 COMMENT '分类表';
 
+# 导航表
+DROP TABLE IF EXISTS ms_navbar;
+CREATE TABLE `ms_navbar` (
+	`id` SMALLINT(6) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
+	`parent_id` SMALLINT(6) UNSIGNED NOT NULL COMMENT '上级ID',
+	`name` VARCHAR(20) NOT NULL COMMENT '名称',
+	`type` TINYINT(1) UNSIGNED NOT NULL COMMENT '类型',
+	`rank` SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0' COMMENT '排序优先级',
+	`content` VARCHAR(255) NOT NULL COMMENT '内容',
+	PRIMARY KEY(id),
+	KEY(rank)
+) ENGINE = InnoDB DEFAULT CHARSET UTF8 COMMENT '导航表';
+
 
 # 后台菜单表
 DROP TABLE IF EXISTS ms_menu;
@@ -494,11 +507,11 @@ VALUES
 (2016, '删除配置', 2001, 'Index','Config','delete','',0,'0'),
 (2017, '配置排序', 2001, 'Index','Config','sort','',0,'0'),
 (2018, '配置缓存清除', 2001, 'Index','Config','ClearCache','',0,'0'),
-(2019, '菜单列表', 2001, 'Index','Menu','index','',0,'1'),
-(2020, '添加菜单', 2001, 'Index','Menu','add','',0,'0'),
-(2021, '编辑菜单', 2001, 'Index','Menu','edit','',0,'0'),
-(2022, '删除菜单', 2001, 'Index','Menu','delete','',0,'0'),
-(2023, '菜单排序', 2001, 'Index','Menu','sort','',0,'0'),
+(2019, '系统菜单列表', 2001, 'Index','Menu','index','',0,'1'),
+(2020, '添加系统菜单', 2001, 'Index','Menu','add','',0,'0'),
+(2021, '编辑系统菜单', 2001, 'Index','Menu','edit','',0,'0'),
+(2022, '删除系统菜单', 2001, 'Index','Menu','delete','',0,'0'),
+(2023, '系统菜单排序', 2001, 'Index','Menu','sort','',0,'0'),
 
 (2200, '敏感词管理', 2000,'Index','Sensitive','','',0,'1'),
 (2201, '敏感词列表', 2200,'Index','Sensitive','index','',0,'1'),
@@ -547,44 +560,50 @@ VALUES
 
 (4000, '内容管理',0,'','','','',0,'1'),
 
-(4001, '分类管理', 4000, 'Index','Category','','',0,'1'),
-(4002, '分类列表', 4001, 'Index','Category','index','',0,'1'),
-(4003, '添加分类', 4001, 'Index','Category','add','',0,'0'),
-(4004, '更新分类', 4001, 'Index','Category','edit','',0,'0'),
-(4005, '删除分类', 4001, 'Index','Category','delete','',0,'0'),
-(4006, '分类排序', 4001, 'Index','Category','sort','',0,'0'),
+(4001, '页面管理', 4000, 'Index','Page','','',0,'1'),
+(4002, '导航栏', 4001, 'Index','Page','Navbar','',0,'1'),
+(4003, '添加导航', 4001, 'Index','Page','NavbarAdd','',0,'0'),
+(4004, '更新导航', 4001, 'Index','Page','NavbarEdit','',0,'0'),
+(4005, '删除导航', 4001, 'Index','Page','NavbarDelete','',0,'0'),
 
-(4100, '文章管理', 4000, 'Index','News','','',0,'1'),
-(4101, '文章列表', 4100, 'Index','News','index','',0,'1'),
-(4102, '添加文章', 4100, 'Index','News','add','',0,'1'),
-(4103, '更新文章', 4100, 'Index','News','edit','',0,'0'),
-(4104, '删除文章', 4100, 'Index','News','delete','',0,'0'),
-(4105, '文章排序', 4100, 'Index','News','sort','',0,'0'),
+(4100, '分类管理', 4000, 'Index','Category','','',0,'1'),
+(4102, '分类列表', 4100, 'Index','Category','index','',0,'1'),
+(4103, '添加分类', 4100, 'Index','Category','add','',0,'0'),
+(4104, '更新分类', 4100, 'Index','Category','edit','',0,'0'),
+(4105, '删除分类', 4100, 'Index','Category','delete','',0,'0'),
+(4106, '分类排序', 4100, 'Index','Category','sort','',0,'0'),
 
-(4200, '图集管理', 4000, 'Index','Atlas','','',0,'1'),
-(4201, '图集列表', 4200, 'Index','Atlas','index','',0,'1'),
-(4202, '添加图集', 4200, 'Index','Atlas','add','',0,'1'),
-(4203, '更新图集', 4200, 'Index','Atlas','edit','',0,'0'),
-(4204, '删除图集', 4200, 'Index','Atlas','delete','',0,'0'),
-(4205, '图集排序', 4200, 'Index','Atlas','sort','',0,'0'),
+(4200, '文章管理', 4000, 'Index','News','','',0,'1'),
+(4201, '文章列表', 4200, 'Index','News','index','',0,'1'),
+(4202, '添加文章', 4200, 'Index','News','add','',0,'1'),
+(4203, '更新文章', 4200, 'Index','News','edit','',0,'0'),
+(4204, '删除文章', 4200, 'Index','News','delete','',0,'0'),
+(4205, '文章排序', 4200, 'Index','News','sort','',0,'0'),
 
-(4300, '友情链接', 4000, 'Index','Link','','',0,'1'),
-(4301, '友情链接列表', 4300,'Index','Link','index','',0,'1'),
-(4302, '添加友情链接', 4300,'Index','Link','add','',0,'0'),
-(4303, '更新友情链接', 4300,'Index','Link','edit','',0,'0'),
-(4304, '删除友情链接', 4300,'Index','Link','delete','',0,'0'),
-(4305, '友情链接排序', 4300,'Index','Link','sort','',0,'0'),
+(4300, '图集管理', 4000, 'Index','Atlas','','',0,'1'),
+(4301, '图集列表', 4300, 'Index','Atlas','index','',0,'1'),
+(4302, '添加图集', 4300, 'Index','Atlas','add','',0,'1'),
+(4303, '更新图集', 4300, 'Index','Atlas','edit','',0,'0'),
+(4304, '删除图集', 4300, 'Index','Atlas','delete','',0,'0'),
+(4305, '图集排序', 4300, 'Index','Atlas','sort','',0,'0'),
 
-(4400, '广告管理', 4000,'Index','Ad','','',0,'1'),
-(4401, '广告位置列表',4400,'Index','Ad','positionList','',0,'1'),
-(4402, '添加广告位置',4400,'Index','Ad','positionAdd','',0,'0'),
-(4403, '更新广告位置',4400,'Index','Ad','positionEdit','',0,'0'),
-(4404, '删除广告位置',4400,'Index','Ad','positionDelete','',0,'0'),
-(4405, '广告列表',4400,'Index','Ad','index','',0,'0'),
-(4406, '添加广告',4400,'Index','Ad','add','',0,'0'),
-(4407, '更新广告',4400,'Index','Ad','edit','',0,'0'),
-(4408, '删除广告',4400,'Index','Ad','delete','',0,'0'),
-(4409, '广告排序',4400,'Index','Ad','sort','',0,'0');
+(4400, '友情链接', 4000, 'Index','Link','','',0,'1'),
+(4401, '友情链接列表', 4400,'Index','Link','index','',0,'1'),
+(4402, '添加友情链接', 4400,'Index','Link','add','',0,'0'),
+(4403, '更新友情链接', 4400,'Index','Link','edit','',0,'0'),
+(4404, '删除友情链接', 4400,'Index','Link','delete','',0,'0'),
+(4405, '友情链接排序', 4400,'Index','Link','sort','',0,'0'),
+
+(4500, '广告管理', 4000,'Index','Ad','','',0,'1'),
+(4501, '广告位置列表',4500,'Index','Ad','positionList','',0,'1'),
+(4502, '添加广告位置',4500,'Index','Ad','positionAdd','',0,'0'),
+(4503, '更新广告位置',4500,'Index','Ad','positionEdit','',0,'0'),
+(4504, '删除广告位置',4500,'Index','Ad','positionDelete','',0,'0'),
+(4505, '广告列表',4500,'Index','Ad','index','',0,'0'),
+(4506, '添加广告',4500,'Index','Ad','add','',0,'0'),
+(4507, '更新广告',4500,'Index','Ad','edit','',0,'0'),
+(4508, '删除广告',4500,'Index','Ad','delete','',0,'0'),
+(4509, '广告排序',4500,'Index','Ad','sort','',0,'0');
 
 
 /*

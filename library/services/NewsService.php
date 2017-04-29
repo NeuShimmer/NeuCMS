@@ -138,9 +138,6 @@ class NewsService extends BaseService {
      * @return boolean
      */
     public static function addNews($admin_id, $code, $cat_id, $title, $intro, $keywords, $source, $image_url, $content, $display = 1, $type = 1) {
-        if (is_numeric($code)) {
-            YCore::exception(-1, '文章编码不能为纯数字');
-        }
         $category_model = new Category();
         $cat_info = $category_model->fetchOne([], ['cat_id' => $cat_id, 'status' => 1]);
         if (empty($cat_info)) {

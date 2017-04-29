@@ -42,7 +42,7 @@ class News extends DbBase {
 				foreach ($childs as $v) {
 					$ids[] = $v['cat_id'];
 				}
-				array_unique($ids);
+				$ids = array_unique($ids);
 				$where .= 'cat_id IN (' . implode(', ', $ids) . ') AND ';
 			} else {
 				$where .= 'cat_id = :cat_id AND ';
