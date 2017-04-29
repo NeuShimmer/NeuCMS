@@ -148,7 +148,7 @@ div {
 				<input name="password" type="password" class="ipt" value="" />
 			</form>
 		</div>
-		<div class="cr">CopyRight 2015-2016 惠州数商科技有限公司</div>
+		<div class="cr">Copyright 2017 微光网络工作室</div>
 	</div>
 </body>
 </html>
