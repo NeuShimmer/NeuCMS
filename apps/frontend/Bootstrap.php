@@ -21,7 +21,7 @@ class Bootstrap extends \common\Bootstrap {
         $router->addRoute('news_list', new \Yaf\Route\Rewrite('/list/:cat', ['controller' => 'News', 'action' => 'list']));
         $router->addRoute('news_list_page', new \Yaf\Route\Rewrite('/list/:cat/:page', ['controller' => 'News', 'action' => 'list']));
         $router->addRoute('atlas_detail', new \Yaf\Route\Rewrite('/atlas/view/:code', ['controller' => 'Atlas', 'action' => 'detail']));
-        $router->addRoute('news_list', new \Yaf\Route\Rewrite('/atlas/list/:cat', ['controller' => 'Atlas', 'action' => 'list']));
-        $router->addRoute('news_list_page', new \Yaf\Route\Rewrite('/atlas/list/:cat/:page', ['controller' => 'Atlas', 'action' => 'list']));
+        $router->addRoute('atlas_list', new \Yaf\Route\Rewrite('/atlas/list/:cat', ['controller' => 'Atlas', 'action' => 'list']));
+        $router->addRoute('atlas_list_page', new \Yaf\Route\Rewrite('/atlas/list/:cat/:page', ['controller' => 'Atlas', 'action' => 'list']));
     }
 }
