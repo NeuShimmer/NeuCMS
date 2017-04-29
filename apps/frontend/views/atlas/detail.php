@@ -7,7 +7,7 @@ require(APP_VIEW_PATH . DIRECTORY_SEPARATOR . 'common/header.php');
 	<?php require(APP_VIEW_PATH . DIRECTORY_SEPARATOR . 'common/navbar.php'); ?>
 	<ol class="breadcrumb">
   		<li><a href="/">首页</a></li>
-  		<li><a href="/list/<?=$cat['cat_id']?>"><?=$cat['cat_name']?></a></li>
+  		<li><a href="/atlas/list/<?=$cat['cat_id']?>"><?=$cat['cat_name']?></a></li>
   		<li class="active"><?=$detail['title']?></li>
 	</ol>
 	<h1><?=$detail['title']?></h1>
