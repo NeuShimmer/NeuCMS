@@ -12,7 +12,7 @@ require(APP_VIEW_PATH . DIRECTORY_SEPARATOR . 'common/header.php');
 	<h1><?=$cat['cat_name']?></h1>
 	<?php
 	foreach ($list['list'] as $article) {
-		echo '<h3><a href="/archives/', $article['news_id'], '">', htmlspecialchars($article['title']), '</a></h3>';
+		echo '<h3><a href="/archives/', empty($article['code']) ? $article['news_id'] : $article['code'], '">', htmlspecialchars($article['title']), '</a></h3>';
 		echo '<p>', $article['intro'], '</p>';
 	}
 	?>

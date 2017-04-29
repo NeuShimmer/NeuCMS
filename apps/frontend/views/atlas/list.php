@@ -11,9 +11,9 @@ require(APP_VIEW_PATH . DIRECTORY_SEPARATOR . 'common/header.php');
 	</ol>
 	<h1><?=$cat['cat_name']?></h1>
 	<?php
-	foreach ($list['list'] as $article) {
-		echo '<h3><a href="/archives/', $article['news_id'], '">', htmlspecialchars($article['title']), '</a></h3>';
-		echo '<p>', $article['intro'], '</p>';
+	foreach ($list['list'] as $atlas) {
+		echo '<h3><a href="/atlas/view/', empty($atlas['code']) ? $atlas['news_id'] : $atlas['code'], '">', htmlspecialchars($atlas['title']), '</a></h3>';
+		echo '<p>', $atlas['intro'], '</p>';
 	}
 	?>
 </div>
