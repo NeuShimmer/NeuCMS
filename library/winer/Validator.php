@@ -193,7 +193,7 @@ class Validator {
      * @return boolean
      */
     public static function is_mobilephone($mobilephone) {
-        return preg_match('/^13[\d]{9}$|14^[0-9]\d{8}|^15[0-9]\d{8}$|^18[0-9]\d{8}$/', $mobilephone) ? true : false;
+        return preg_match('/^1(3|4|5|7|8)[\d]{9}$/', $mobilephone) ? true : false;
     }
     
     /**
