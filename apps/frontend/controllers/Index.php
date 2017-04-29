@@ -27,4 +27,18 @@ class IndexController extends \common\controllers\Common {
             echo 'ok';
         }
     }
+
+	/**
+	 * 特殊页面
+	 */
+	public function pageAction() {
+		$this->end();
+        $page = $this->getString('page');
+        $script_path = $this->getViewPath();
+		$fullpath = $script_path . "/page/{$page}.php";
+		if (!preg_match('/^([a-zA-Z0-9_]+)$/', $page) || !is_file($fullpath)) {
+			$this->error('页面不存在或已经删除', YUrl::createFrontendUrl('Index', 'Index', 'Index'));
+		}
+        $this->_view->display($fullpath);
+	}
 }
