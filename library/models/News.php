@@ -29,29 +29,11 @@ class News extends DbBase {
 	 * @param number $cat_include_child 是否包含子分类
      * @return array
      */
-    public function getList($title = '', $admin_id = -1, $starttime = '', $endtime = '', $page, $count, $cat_id = NULL, $cat_include_child = 1, $display = 0) {
+    public function getList($title = '', $admin_id = -1, $starttime = '', $endtime = '', $page, $count, $cat_id = NULL, $cat_include_child = 1, $display = 0, $type = -1, $status = 1) {
         $offset  = $this->getPaginationOffset($page, $count);
         $columns = ' * ';
-        $where   = ' WHERE status = :status ';
-        $params = [
-            ':status' => 1
-        ];
-        if (strlen($title) > 0) {
-            $where .= ' AND title LIKE :title ';
-            $params[':title'] = "%{$title}%";
-        }
-        if (strlen($starttime) > 0) {
-            $where .= ' AND created_time > :starttime ';
-            $params[':starttime'] = strtotime($starttime);
-        }
-        if (strlen($endtime) > 0) {
-            $where .= ' AND created_time < :endtime ';
-            $params[':endtime'] = strtotime($endtime);
-        }
-        if ($admin_id != - 1) {
-            $where .= ' AND created_by = :admin_id ';
-            $params[':admin_id'] = $admin_id;
-        }
+		$where = 'WHERE ';
+        $params = [];
 		if ($cat_id !== NULL) {
 			if ($cat_include_child) {
 				$ids = [$cat_id];
@@ -61,22 +43,45 @@ class News extends DbBase {
 					$ids[] = $v['cat_id'];
 				}
 				array_unique($ids);
-				$where .= 'AND cat_id IN (' . implode(', ', $ids) . ') ';
+				$where .= 'cat_id IN (' . implode(', ', $ids) . ') AND ';
 			} else {
-				$where .= 'AND cat_id = :cat_id ';
+				$where .= 'cat_id = :cat_id AND ';
             	$params[':cat_id'] = $cat_id;
 			}
 		}
-		if ($display) {
-			$where .= 'AND display = 1 ';
+        if (strlen($title) > 0) {
+            $where .= 'title LIKE :title AND ';
+            $params[':title'] = "%{$title}%";
+        }
+        if (strlen($starttime) > 0) {
+            $where .= 'created_time > :starttime AND ';
+            $params[':starttime'] = strtotime($starttime);
+        }
+        if (strlen($endtime) > 0) {
+            $where .= 'created_time < :endtime AND ';
+            $params[':endtime'] = strtotime($endtime);
+        }
+        if ($admin_id != - 1) {
+            $where .= 'created_by = :admin_id AND ';
+            $params[':admin_id'] = $admin_id;
+        }
+        $where .= ' status = :status AND ';
+        $params[':status'] = $status;
+		if ($type !== -1) {
+			$where .= 'type = :type AND ';
+            $params[':type'] = $type;
 		}
-        $order_by = ' ORDER BY news_id DESC ';
-        $sql = "SELECT COUNT(1) AS count FROM {$this->_table_name} {$where}";
+		if ($display) {
+			$where .= 'display = 1 AND ';
+		}
+		$where = trim($where, 'AND ');
+        //$order_by = ' ORDER BY news_id DESC ';
+        $sql = "SELECT count(*) AS num FROM {$this->_table_name} {$where}";
         $sth = $this->link->prepare($sql);
         $sth->execute($params);
         $count_data = $sth->fetch();
-        $total = $count_data ? $count_data['count'] : 0;
-        $sql   = "SELECT {$columns} FROM {$this->_table_name} {$where} {$order_by} LIMIT {$offset},{$count}";
+        $total = $count_data ? $count_data['num'] : 0;
+        $sql   = "SELECT {$columns} FROM {$this->_table_name} {$where} LIMIT {$offset},{$count}";
         $sth   = $this->link->prepare($sql);
         $sth->execute($params);
         $list = $sth->fetchAll();

@@ -28,7 +28,7 @@ class NewsService extends BaseService {
 	 * @param number $cat_include_child 是否包含子分类
      * @return array
      */
-    public static function getNewsList($title = '', $admin_name = '', $starttime = '', $endtime = '', $page = 1, $count = 20, $cat_id = NULL, $cat_include_child = 1, $display = 0) {
+    public static function getNewsList($title = '', $admin_name = '', $starttime = '', $endtime = '', $page = 1, $count = 20, $cat_id = NULL, $cat_include_child = 1, $display = 0, $type = -1, $status = 1) {
         if (strlen($starttime) > 0 && !Validator::is_date($starttime, 'Y-m-d H:i:s')) {
             YCore::exception(-1, '开始时间格式不对');
         }
@@ -45,7 +45,7 @@ class NewsService extends BaseService {
             $admin_id = $admin ? $admin['admin_id'] : 0;
         }
         $news_model = new News();
-        return $news_model->getList($title, $admin_id, $starttime, $endtime, $page, $count, $cat_id, $cat_include_child, $display);
+        return $news_model->getList($title, $admin_id, $starttime, $endtime, $page, $count, $cat_id, $cat_include_child, $display, $type, $status);
     }
 
     /**
@@ -57,8 +57,8 @@ class NewsService extends BaseService {
      */
     public static function getByCodeNewsDetail($code, $is_get_content = false) {
         $news_model = new News();
-        $data = $news_model->fetchOne([], ['code' => $code, 'status' => 1]);
-        if (empty($data)) {
+        $data = $news_model->fetchOne([], ['code' => $code]);
+        if (empty($data) || $data['status'] != 1) {
             YCore::exception(-1, '文章不存在或已经删除');
         }
         if ($is_get_content) {
@@ -83,8 +83,8 @@ class NewsService extends BaseService {
      */
     public static function getNewsDetail($news_id, $is_get_content = false) {
         $news_model = new News();
-        $data = $news_model->fetchOne([], ['news_id' => $news_id, 'status' => 1]);
-        if (empty($data)) {
+        $data = $news_model->fetchOne([], ['news_id' => $news_id]);
+        if (empty($data) || $data['status'] != 1) {
             YCore::exception(-1, '文章不存在或已经删除');
         }
         if ($is_get_content) {
@@ -134,9 +134,10 @@ class NewsService extends BaseService {
      * @param string $image_url 文章图片。
      * @param string $content 文章内容。
      * @param number $display 显示状态：1显示、0隐藏。
+     * @param number $type 类型，1为文章，2为图集
      * @return boolean
      */
-    public static function addNews($admin_id, $code, $cat_id, $title, $intro, $keywords, $source, $image_url, $content, $display = 1) {
+    public static function addNews($admin_id, $code, $cat_id, $title, $intro, $keywords, $source, $image_url, $content, $display = 1, $type = 1) {
         if (is_numeric($code)) {
             YCore::exception(-1, '文章编码不能为纯数字');
         }
@@ -180,6 +181,7 @@ class NewsService extends BaseService {
         $data['created_time'] = $_SERVER['REQUEST_TIME'];
         $data['cat_id']       = $cat_id;
         $data['status']       = 1;
+        $data['type'] = $type;
         unset($data['content']);
         $news_id = $news_model->insert($data);
         if ($news_id > 0) {

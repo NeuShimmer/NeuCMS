@@ -75,7 +75,7 @@ html {
         } else if ($cat['cat_type'] == 2) {
             echo '友情链接分类';
         } else if ($cat['cat_type'] == 3) {
-            echo '商品分类';
+            echo '图集分类';
         }
         ?>
 							</td>
@@ -106,7 +106,7 @@ html {
                 } else if ($sub_m['cat_type'] == 2) {
                     echo '友情链接分类';
                 } else if ($sub_m['cat_type'] == 3) {
-                    echo '商品分类';
+                    echo '图集分类';
                 }
                 ?>
 							</td>
@@ -138,7 +138,7 @@ html {
                         } else if ($ss_m['cat_type'] == 2) {
                             echo '友情链接分类';
                         } else if ($ss_m['cat_type'] == 3) {
-                            echo '商品分类';
+                            echo '图集分类';
                         }
                         ?>
 							</td>

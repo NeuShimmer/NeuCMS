@@ -1,8 +1,8 @@
 <?php
 /**
- * 文章管理。
- * @author winerQin
- * @date 2015-11-26
+ * 图集管理。
+ * @author ShuangYa
+ * @date 2017-4-29
  */
 
 use common\YCore;
@@ -10,10 +10,10 @@ use services\NewsService;
 use winer\Paginator;
 use services\CategoryService;
 
-class NewsController extends \common\controllers\Admin {
+class AtlasController extends \common\controllers\Admin {
     
     /**
-     * 文章列表。
+     * 列表。
      */
     public function indexAction() {
         $title = $this->getString('title', '');
@@ -21,7 +21,7 @@ class NewsController extends \common\controllers\Admin {
         $starttime = $this->getString('starttime', '');
         $endtime = $this->getString('endtime', '');
         $page = $this->getInt(YCore::appconfig('pager'), 1);
-        $list = NewsService::getNewsList($title, $admin_name, $starttime, $endtime, $page, 20, NULL, 1, 0, 1);
+        $list = NewsService::getNewsList($title, $admin_name, $starttime, $endtime, $page, 20, NULL, 1, 0, 2);
         $paginator = new Paginator($list['total'], 20);
         $page_html = $paginator->backendPageShow();
         $this->_view->assign('page_html', $page_html);
@@ -33,7 +33,7 @@ class NewsController extends \common\controllers\Admin {
     }
     
     /**
-     * 添加文章。
+     * 添加。
      */
     public function addAction() {
         if ($this->_request->isPost()) {
@@ -45,17 +45,21 @@ class NewsController extends \common\controllers\Admin {
             $source = $this->getString('source');
             $image_url = $this->getString('image_url');
             $content = $this->getString('content');
-            $display = $this->getInt('display');
-            $status = NewsService::addNews($this->admin_id, $code, $cat_id, $title, $intro, $keywords, $source, $image_url, $content, $display);
-            if ($status) {
-                $this->json($status, '操作成功');
-            } else {
-                $this->json($status, '操作失败');
-            }
+			if (!is_array(json_decode($content, 1))) {
+				$this->json($status, '操作失败');
+			} else {
+				$display = $this->getInt('display');
+				$status = NewsService::addNews($this->admin_id, $code, $cat_id, $title, $intro, $keywords, $source, $image_url, $content, $display, 2);
+				if ($status) {
+					$this->json($status, '操作成功');
+				} else {
+					$this->json($status, '操作失败');
+				}
+			}
         }
-        $news_cat_list = CategoryService::getCategoryList(0, CategoryService::CAT_NEWS);
+        $news_cat_list = CategoryService::getCategoryList(0, CategoryService::CAT_ATLAS);
         if (empty($news_cat_list)) {
-            YCore::exception(- 1, '请立即创建文章分类');
+            YCore::exception(- 1, '请立即创建图集分类');
         }
         $frontend_url = YCore::config('frontend_domain_name');
         $this->_view->assign('news_cat_list', $news_cat_list);
@@ -63,7 +67,7 @@ class NewsController extends \common\controllers\Admin {
     }
     
     /**
-     * 编辑文章。
+     * 编辑。
      */
     public function editAction() {
         if ($this->_request->isPost()) {
@@ -86,16 +90,16 @@ class NewsController extends \common\controllers\Admin {
         }
         $news_id = $this->getInt('news_id');
         $detail = NewsService::getNewsDetail($news_id, true);
-        $news_cat_list = CategoryService::getCategoryList(0, CategoryService::CAT_NEWS);
+        $news_cat_list = CategoryService::getCategoryList(0, CategoryService::CAT_ATLAS);
         if (empty($news_cat_list)) {
-            YCore::exception(- 1, '请立即创建文章分类');
+            YCore::exception(- 1, '请立即创建图集分类');
         }
         $this->_view->assign('news_cat_list', $news_cat_list);
         $this->_view->assign('detail', $detail);
     }
     
     /**
-     * 文章删除。
+     * 删除。
      */
     public function deleteAction() {
         $news_id = $this->getInt('news_id');
@@ -108,7 +112,7 @@ class NewsController extends \common\controllers\Admin {
     }
     
     /**
-     * 文章排序。
+     * 排序。
      */
     public function sortAction() {
         if ($this->_request->isPost()) {

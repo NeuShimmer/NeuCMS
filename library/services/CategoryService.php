@@ -17,8 +17,8 @@ class CategoryService extends BaseService {
     // 文章分类。
     const CAT_LINK = 2;
     // 友情链接分类。
-    const CAT_GOODS = 3;
-    // 商品分类。
+    const CAT_ATLAS = 3;
+    // 图集分类。
 
     /**
      * 获取分类列表。

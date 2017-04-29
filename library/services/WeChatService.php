@@ -56,19 +56,20 @@ class WeChatService extends BaseService {
      */
     public static function addWxAccount($data) {
         $rules = [
-                'admin_id' => '管理员ID|require:1000000',
-                'wx_sn' => '公众号编码|require:1000000|alpha_dash:1000000|len:1000000:1:32:1',
+				'admin_id' => '管理员ID|require:1000000',
+                'wx_sn' => '公众号编码|alpha_dash:1000000|len:1000000:1:32:1',
                 'wx_account' => '公众号微信号|require:1000000|alpha_dash:1000000|len:1000000:1:80:1',
                 'wx_type' => '公众号类型|require:1000000|number_between:1000000:1:3',
                 'wx_auth' => '公众号是否认证|require:1000000|number_between:1000000:0:1',
                 'wx_appid' => '微信公众号appid|require:1000000|len:1000000:1:50:1',
                 'wx_appsecret' => '微信公众号密钥|require:1000000|len:1000000:1:50:1',
-                'wx_token' => '公众号Token|require:1000000|len:1000000:1:32:1',
-                'wx_aeskey' => '公众号EncodingAESKey|require:1000000|len:1000000:1:43:1',
-                'wx_cert_path' => '公众号支付证书地址|len:1000000:1:100:1','wx_cert_key' => '公众号支付密钥地址|len:1000000:1:100:1',
+                'wx_token' => '公众号Token|len:1000000:1:32:1',
+                'wx_aeskey' => '公众号EncodingAESKey|len:1000000:1:43:1',
+                'wx_cert_path' => '公众号支付证书地址|len:1000000:1:100:1',
+				'wx_cert_key' => '公众号支付密钥地址|len:1000000:1:100:1',
                 'wx_report_level' => '微信支付上报等级|require:1000000|number_between:1000000:0:5',
-                'wx_proxy_host' => '支付代理HOST|require:1000000|len:1000000:1:20:1',
-                'wx_proxy_port' => '支付代理端口|require:1000000|number_between:1000000:0:100000000' 
+                'wx_proxy_host' => '支付代理HOST|len:1000000:1:20:1',
+                'wx_proxy_port' => '支付代理端口|number_between:1000000:0:100000000' 
         ];
         Validator::valido($data, $rules);
         $account_model = new WxAccount();
@@ -117,19 +118,21 @@ class WeChatService extends BaseService {
      */
     public static function editWxAccount($data) {
         $rules = [
-                'account_id' => '公众号ID|require:1000000','admin_id' => '管理员ID|require:1000000',
-                'wx_sn' => '公众号编码|require:1000000|alpha_dash:1000000|len:1000000:1:32:1',
+                'account_id' => '公众号ID|require:1000000',
+				'admin_id' => '管理员ID|require:1000000',
+                'wx_sn' => '公众号编码|alpha_dash:1000000|len:1000000:1:32:1',
                 'wx_account' => '公众号微信号|require:1000000|alpha_dash:1000000|len:1000000:1:80:1',
                 'wx_type' => '公众号类型|require:1000000|number_between:1000000:1:3',
                 'wx_auth' => '公众号是否认证|require:1000000|number_between:1000000:0:1',
                 'wx_appid' => '微信公众号appid|require:1000000|len:1000000:1:50:1',
                 'wx_appsecret' => '微信公众号密钥|require:1000000|len:1000000:1:50:1',
-                'wx_token' => '公众号Token|require:1000000|len:1000000:1:32:1',
-                'wx_aeskey' => '公众号EncodingAESKey|require:1000000|len:1000000:1:43:1',
-                'wx_cert_path' => '公众号支付证书地址|len:1000000:1:100:1','wx_cert_key' => '公众号支付密钥地址|len:1000000:1:100:1',
+                'wx_token' => '公众号Token|len:1000000:1:32:1',
+                'wx_aeskey' => '公众号EncodingAESKey|len:1000000:1:43:1',
+                'wx_cert_path' => '公众号支付证书地址|len:1000000:1:100:1',
+				'wx_cert_key' => '公众号支付密钥地址|len:1000000:1:100:1',
                 'wx_report_level' => '微信支付上报等级|require:1000000|number_between:1000000:0:5',
-                'wx_proxy_host' => '支付代理HOST|require:1000000|len:1000000:1:20:1',
-                'wx_proxy_port' => '支付代理端口|require:1000000|number_between:1000000:0:100000000' 
+                'wx_proxy_host' => '支付代理HOST|len:1000000:1:20:1',
+                'wx_proxy_port' => '支付代理端口|number_between:1000000:0:100000000' 
         ];
         Validator::valido($data, $rules);
         $account_model = new WxAccount();
