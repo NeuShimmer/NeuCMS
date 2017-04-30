@@ -328,28 +328,30 @@ CREATE TABLE ms_find_pwd(
 ) ENGINE = InnoDB DEFAULT CHARSET UTF8 COMMENT '找回密码记录表';
 
 # 文章表
-DROP TABLE IF EXISTS ms_news;
+DROP TABLE IF EXISTS `ms_news`;
 CREATE TABLE `ms_news` (
-	news_id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '文章ID、主键',
-	cat_id INT(11) UNSIGNED NOT NULL COMMENT '分类ID。对应ms_category.cat_id',
-	title CHAR(50) NOT NULL COMMENT '文章标题',
-	code CHAR(20) NOT NULL COMMENT '文章编码(只允许字母数字下划线横线)',
-	intro CHAR(250) NOT NULL COMMENT '文章简介。也是SEO中的description',
-	keywords CHAR(50) NOT NULL DEFAULT '' COMMENT '文章关键词。也是SEO中的keywords',
-	image_url CHAR(100) NOT NULL DEFAULT '' COMMENT '文章列表图片',
-	source CHAR(20) NOT NULL DEFAULT '' COMMENT '文章来源',
-	display TINYINT(1) NOT NULL DEFAULT '0' COMMENT '文章是否显示。1显示、0隐藏',
-	status TINYINT(1) NOT NULL DEFAULT '0' COMMENT '文章状态：0无效、1正常、2删除',
-	listorder SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0' COMMENT '排序。小到大排序。',
-	hits INT(11) UNSIGNED NOT NULL DEFAULT '0' COMMENT '文章访问量',
-	created_by INT(11) UNSIGNED NOT NULL COMMENT '创建人',
-	created_time INT(11) UNSIGNED NOT NULL COMMENT '创建时间',
-	modified_by INT(11) UNSIGNED NOT NULL DEFAULT '0' COMMENT '修改人',
-	modified_time INT(11) UNSIGNED NOT NULL DEFAULT '0' COMMENT '修改时间',
-	PRIMARY KEY(news_id),
-	KEY(created_time),
-	KEY(created_by)
-) ENGINE=InnoDB DEFAULT CHARSET UTF8 COMMENT '文章表';
+  `news_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '文章ID、主键',
+  `cat_id` int(11) unsigned NOT NULL COMMENT '分类ID。对应ms_category.cat_id',
+  `type` tinyint(1) NOT NULL,
+  `title` char(50) NOT NULL COMMENT '文章标题',
+  `code` char(20) NOT NULL COMMENT '文章编码(只允许字母数字下划线横线)',
+  `intro` char(250) NOT NULL COMMENT '文章简介。也是SEO中的description',
+  `keywords` char(50) NOT NULL DEFAULT '' COMMENT '文章关键词。也是SEO中的keywords',
+  `image_url` char(100) NOT NULL DEFAULT '' COMMENT '文章列表图片',
+  `source` char(20) NOT NULL DEFAULT '' COMMENT '文章来源',
+  `display` tinyint(1) NOT NULL DEFAULT '0' COMMENT '文章是否显示。1显示、0隐藏',
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '文章状态：0无效、1正常、2删除',
+  `listorder` smallint(6) unsigned NOT NULL DEFAULT '0' COMMENT '排序。小到大排序。',
+  `hits` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '文章访问量',
+  `created_by` int(11) unsigned NOT NULL COMMENT '创建人',
+  `created_time` int(11) unsigned NOT NULL COMMENT '创建时间',
+  `modified_by` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '修改人',
+  `modified_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间',
+  PRIMARY KEY (`news_id`),
+  KEY `created_time` (`created_time`),
+  KEY `created_by` (`created_by`),
+  KEY `cat_status_type` (`cat_id`,`status`,`type`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='文章表';
 
 # 文章副表
 DROP TABLE IF EXISTS ms_news_data;
