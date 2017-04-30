@@ -6,6 +6,7 @@
  */
 
 use common\YCore;
+use common\YUrl;
 use services\NavbarService;
 
 class PageController extends \common\controllers\Admin {

@@ -29,7 +29,7 @@ html {
 					<tr>
 						<td align='left'><?=$a?></td>
 						<td align='center'>
-							<a href="<?=$_frontend_domain_name?>/page/<?=$a?>" target="_blank">查看</a>
+							<a href="<?=$_frontend_domain_name?>page/<?=$a?>" target="_blank">查看</a>
 						</td>
 					</tr>
 				<?php endforeach; ?>
