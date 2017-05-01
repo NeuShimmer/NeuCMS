@@ -92,8 +92,7 @@
             var me = this,
                 lang = me.lang,
                 conUrl = me.convert_url(url);
-
-            if(!me.endWith(conUrl,[".swf",".flv",".wmv"])){
+            if(!/\.([swf|flv|wmv])/.test(url) || (url.indexOf('http://') !== 0 && url.indexOf('https://') !== 0)) {
                 $("#eduiVideoPreview", me.$widget).html( lang.urlError );
                 return;
             }
