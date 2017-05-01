@@ -17,11 +17,20 @@ html {
 			<tr>
 				<th width="100">文章分类：</th>
 				<td><select name="cat_id">
-		<?php foreach ($news_cat_list as $cat): ?>
-    		<option
-							<?php echo $cat['cat_id']==$detail['cat_id'] ? 'selected="selected"' : ''; ?>
-							value="<?php echo $cat['cat_id']; ?>"><?php echo $cat['cat_name']; ?></option>
-        <?php endforeach; ?>
+					<?php foreach ($news_cat_list as $cat): ?>
+    					<option value="<?=$cat['cat_id']?>" <?php if ($cat['cat_id']==$detail['cat_id']) echo 'selected'; ?>><?=$cat['cat_name']?></option>
+						<?php
+						if (isset($cat['sub']) && is_array($cat['sub'])) {
+							foreach ($cat['sub'] as $sub_cat) {
+								echo '<option value="', $cat['cat_id'], '"';
+								if ($sub_cat['cat_id']==$detail['cat_id']) {
+									echo ' selected';
+								}
+								echo '>&nbsp;&nbsp;&nbsp;├─ ', $sub_cat['cat_name'], '</option>';
+							}
+						}
+						?>
+        			<?php endforeach; ?>
 		</select></td>
 			</tr>
 			<tr>

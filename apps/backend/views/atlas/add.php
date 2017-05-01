@@ -33,10 +33,17 @@ html {
 			<tr>
 				<th width="100">图集分类：</th>
 				<td><select name="cat_id">
-		<?php foreach ($news_cat_list as $cat): ?>
-    		<option value="<?php echo $cat['cat_id']; ?>"><?php echo $cat['cat_name']; ?></option>
-        <?php endforeach; ?>
-		</select></td>
+				<?php foreach ($news_cat_list as $cat): ?>
+					<option value="<?php echo $cat['cat_id']; ?>"><?php echo $cat['cat_name']; ?></option>
+					<?php
+					if (isset($cat['sub']) && is_array($cat['sub'])) {
+						foreach ($cat['sub'] as $sub_cat) {
+							echo '<option value="', $cat['cat_id'], '">&nbsp;&nbsp;&nbsp;├─ ', $sub_cat['cat_name'], '</option>';
+						}
+					}
+					?>
+        		<?php endforeach; ?>
+				</select></td>
 			</tr>
 			<tr>
 				<th width="100">图集标题：</th>
