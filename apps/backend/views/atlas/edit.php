@@ -70,8 +70,7 @@ html {
 			</tr>
 			<tr>
 				<th width="100">图集简介：</th>
-				<td><textarea name="intro" id="intro" style="width: 600px;" rows="5"
-						cols="50"><?php echo htmlspecialchars($detail['intro']) ?></textarea></td>
+				<td><textarea name="intro" id="intro" style="width: 90%;" rows="5" cols="50"><?php echo htmlspecialchars($detail['intro']) ?></textarea></td>
 			</tr>
 			<tr>
 				<th width="100">来源：</th>
@@ -136,7 +135,7 @@ $(document).ready(function(){
             data: $('form').eq(0).serialize(),
             success: function(data) {
                 if (data.errcode == 0) {
-                	alert('添加成功');
+                	alert('更新成功');
 					window.location.reload();
                 } else {
                 	dialogTips(data.errmsg, 3);

@@ -10,8 +10,7 @@ html {
 </style>
 
 <div class="pad_10">
-	<form
-		action="<?php echo YUrl::createBackendUrl('', 'News', 'edit'); ?>"
+	<form action="<?php echo YUrl::createBackendUrl('', 'News', 'edit'); ?>"
 		method="post" name="myform" id="myform">
 		<table cellpadding="2" cellspacing="1" class="table_form" width="100%">
 			<tr>
@@ -53,8 +52,7 @@ html {
 			</tr>
 			<tr>
 				<th width="100">文章简介：</th>
-				<td><textarea name="intro" id="intro" style="width: 600px;" rows="5"
-						cols="50"><?php echo htmlspecialchars($detail['intro']) ?></textarea></td>
+				<td><textarea name="intro" id="intro" style="width: 90%;" rows="5" cols="50"><?php echo htmlspecialchars($detail['intro']) ?></textarea></td>
 			</tr>
 			<tr>
 				<th width="100">来源：</th>
@@ -80,8 +78,7 @@ html {
 			</tr>
 			<tr>
 				<th width="100">文章内容：</th>
-				<td><textarea name="content" id="editor_id" style="width: 600px;"
-						rows="5" cols="50"><?php echo $detail['content']; ?></textarea></td>
+				<td><textarea name="content" id="editor_id" style="width: 90%;" rows="5" cols="50"><?php echo $detail['content']; ?></textarea></td>
 			</tr>
 			<tr>
 				<td width="100%" align="center" colspan="2"><input type="hidden"

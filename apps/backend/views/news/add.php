@@ -68,8 +68,7 @@ html {
 			</tr>
 			<tr>
 				<th width="100">文章内容：</th>
-				<td><textarea name="content" id="editor_id" style="width: 90%;"
-						rows="5" cols="50"></textarea></td>
+				<td><textarea name="content" id="editor_id" style="width: 90%;" rows="5" cols="50"></textarea></td>
 			</tr>
 			<tr>
 				<td width="100%" align="center" colspan="2"><input id="form_submit"

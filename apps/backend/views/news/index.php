@@ -95,9 +95,7 @@ Calendar.setup({
 						<td align="center"><?php echo $item['hits']; ?></td>
 						<td align="left"><?php echo date('Y-m-d H:i:s', $item['modified_time']); ?></td>
 						<td align="left"><?php echo date('Y-m-d H:i:s', $item['created_time']); ?></td>
-						<td align="center"><a href="###"
-							onclick="edit(<?php echo $item['news_id'] ?>, '<?php echo $item['title'] ?>')"
-							title="修改">修改</a> | <a href="###"
+						<td align="center"><a href="<?=YUrl::createBackendUrl('', 'News', 'edit'); ?>?news_id=<?=$item['news_id']?>" title="修改">修改</a> | <a href="###"
 							onclick="deleteDialog('deleteDelete', '<?php echo YUrl::createBackendUrl('', 'News', 'delete', ['news_id' => $item['news_id']]); ?>', '<?php echo $item['title'] ?>')"
 							title="删除">删除</a></td>
 					</tr>
@@ -113,12 +111,5 @@ Calendar.setup({
 
 	</form>
 </div>
-<script type="text/javascript">
-function edit(id, name) {
-	var title = '修改『' + name + '』';
-	var page_url = "<?php echo YUrl::createBackendUrl('', 'News', 'edit'); ?>?news_id="+id;
-	postDialog('editNews', page_url, title, 800, 500, '', 'yes');
-}
-</script>
 </body>
 </html>
