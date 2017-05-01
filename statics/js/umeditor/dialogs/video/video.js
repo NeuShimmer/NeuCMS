@@ -92,16 +92,22 @@
             var me = this,
                 lang = me.lang,
                 conUrl = me.convert_url(url);
-            if(!/\.([swf|flv|wmv])/.test(url) || (url.indexOf('http://') !== 0 && url.indexOf('https://') !== 0)) {
+            if(url.indexOf('http://') !== 0 && url.indexOf('https://') !== 0) {
                 $("#eduiVideoPreview", me.$widget).html( lang.urlError );
                 return;
             }
-            $("#eduiVideoPreview", me.$widget)[0].innerHTML = '<embed type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"' +
-                ' src="' + url + '"' +
-                ' width="' + 420  + '"' +
-                ' height="' + 280  + '"' +
-                ' wmode="transparent" play="true" loop="false" menu="false" allowscriptaccess="never" allowfullscreen="true" ></embed>';
-
+			if (/\.([swf|flv|wmv])/.test(url)) {
+				$("#eduiVideoPreview", me.$widget)[0].innerHTML = '<embed type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"' +
+					' src="' + url + '"' +
+					' width="' + 420  + '"' +
+					' height="' + 280  + '"' +
+					' wmode="transparent" play="true" loop="false" menu="false" allowscriptaccess="never" allowfullscreen="true" ></embed>';
+			} else {
+				$("#eduiVideoPreview", me.$widget)[0].innerHTML = '<video src="' + url + '"' + 
+					' width="' + 420  + '"' +
+					' height="' + 280  + '"' +
+					' preload="true" loop="loop" controls="controls" ></video>';
+			}
         },
         /**
          * 将单个视频信息插入编辑器中
