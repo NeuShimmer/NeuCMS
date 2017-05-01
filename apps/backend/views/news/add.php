@@ -1,7 +1,6 @@
 <?php
 use common\YUrl;
 require_once (APP_VIEW_PATH . DIRECTORY_SEPARATOR . 'common/header.php');
-var_dump($news_cat_list);
 ?>
 
 <style type="text/css">
@@ -27,7 +26,7 @@ html {
 					}
 					?>
 				<?php endforeach; ?>
-		</select></td>
+				</select></td>
 			</tr>
 			<tr>
 				<th width="100">文章标题：</th>
