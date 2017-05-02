@@ -1,6 +1,8 @@
 <?php
+use common\YCore;
 use common\YUrl;
 require_once (APP_VIEW_PATH . DIRECTORY_SEPARATOR . 'common/header.php');
+$_frontend_url = YCore::config('frontend_domain_name');
 ?>
 
 <div class="subnav">
@@ -77,7 +79,7 @@ Calendar.setup({
 						<th width="5%" align="center">浏览量</th>
 						<th width="8%" align="left">修改时间</th>
 						<th width="8%" align="left">创建时间</th>
-						<th width="10%" align="center">管理操作</th>
+						<th width="10%" align="center">操作</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -86,7 +88,7 @@ Calendar.setup({
 						<td align="center"><?php echo $item['news_id']; ?></td>
 						<td align="center"><a target="_blank"
 							href="<?php echo YUrl::filePath($item['image_url']); ?>"><img
-								width="120" height="120"
+								width="60" height="60"
 								src="<?php echo YUrl::filePath($item['image_url']); ?>" /></a></td>
 						<td align="left"><?php echo $item['title']; ?></td>
 						<td align="left"><?php echo $item['intro']; ?></td>
@@ -95,8 +97,10 @@ Calendar.setup({
 						<td align="center"><?php echo $item['hits']; ?></td>
 						<td align="left"><?php echo date('Y-m-d H:i:s', $item['modified_time']); ?></td>
 						<td align="left"><?php echo date('Y-m-d H:i:s', $item['created_time']); ?></td>
-						<td align="center"><a href="<?=YUrl::createBackendUrl('', 'News', 'edit'); ?>?news_id=<?=$item['news_id']?>" title="修改">修改</a> | <a href="###"
-							onclick="deleteDialog('deleteDelete', '<?php echo YUrl::createBackendUrl('', 'News', 'delete', ['news_id' => $item['news_id']]); ?>', '<?php echo $item['title'] ?>')"
+						<td align="center">
+							<a href="<?=$_frontend_url?>archives/<?=$item['news_id']?>" title="查看" target="_blank">查看</a> | 
+							<a href="<?=YUrl::createBackendUrl('', 'News', 'edit'); ?>?news_id=<?=$item['news_id']?>" title="修改">修改</a> | 
+							<a href="#" onclick="deleteDialog('deleteDelete', '<?php echo YUrl::createBackendUrl('', 'News', 'delete', ['news_id' => $item['news_id']]); ?>', '<?php echo $item['title'] ?>')"
 							title="删除">删除</a></td>
 					</tr>
     <?php endforeach; ?>
