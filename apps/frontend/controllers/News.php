@@ -25,7 +25,11 @@ class NewsController extends \common\controllers\Common {
 			//User self-define code
 			$detail = NewsService::getByCodeDetail($code);
 		}
-		if ($detail['display'] != 1) {
+		$connection_code_get = $this->getString('connection_code', '');
+		if (!empty($connection_code_get)) {
+			$connection_code = YCore::appconfig('connection.code');
+		}
+		if ($detail['display'] != 1 && (empty($connection_code_get) || $connection_code !== $connection_code_get)) {
 			$this->error('文章不存在或已经删除', YUrl::createFrontendUrl('Index', 'Index', 'Index'));
 		}
 		$cat_info = CategoryService::getCategoryDetail($detail['cat_id']);

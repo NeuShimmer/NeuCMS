@@ -98,10 +98,9 @@ Calendar.setup({
 						<td align="left"><?php echo date('Y-m-d H:i:s', $item['modified_time']); ?></td>
 						<td align="left"><?php echo date('Y-m-d H:i:s', $item['created_time']); ?></td>
 						<td align="center">
-							<a href="<?=$_frontend_url?>atlas/view/<?=$item['news_id']?>" title="查看" target="_blank">查看</a> | 
+							<a href="<?=$_frontend_url?>atlas/view/<?=$item['news_id']?>?connection_code=<?=$_connection_code?>" title="查看" target="_blank">查看</a> | 
 							<a href="<?=YUrl::createBackendUrl('', 'Atlas', 'edit'); ?>?news_id=<?=$item['news_id']?>" title="修改">修改</a> | 
-							<a href="#" onclick="deleteDialog('deleteDelete', '<?php echo YUrl::createBackendUrl('', 'Atlas', 'delete', ['news_id' => $item['news_id']]); ?>', '<?php echo $item['title'] ?>')"
-							title="删除">删除</a>
+							<a href="#" onclick="deleteDialog('deleteDelete', '<?php echo YUrl::createBackendUrl('', 'Atlas', 'delete', ['news_id' => $item['news_id']]); ?>', '<?php echo $item['title'] ?>')" title="删除">删除</a>
 							</td>
 					</tr>
     <?php endforeach; ?>
