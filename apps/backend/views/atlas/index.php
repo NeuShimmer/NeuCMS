@@ -88,7 +88,7 @@ Calendar.setup({
 						<td align="center"><?php echo $item['news_id']; ?></td>
 						<td align="center"><a target="_blank"
 							href="<?php echo YUrl::filePath($item['image_url']); ?>"><img
-								width="60" height="60"
+								width="50" height="50"
 								src="<?php echo YUrl::filePath($item['image_url']); ?>" /></a></td>
 						<td align="left"><?php echo $item['title']; ?></td>
 						<td align="left"><?php echo $item['intro']; ?></td>
