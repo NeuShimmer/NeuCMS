@@ -83,7 +83,7 @@ html {
 						<td align='center'><a
 							href="javascript:postDialog('addCategory', '<?php echo YUrl::createBackendUrl('', 'Category', 'add', ['parentid' => $cat['cat_id']]); ?>', '添加子分类', 450, 280);">添加子分类</a>
 							| <a
-							href="javascript:postDialog('editCategory', '<?php echo YUrl::createBackendUrl('', 'Category', 'edit', ['cat_id' => $cat['cat_id']]); ?>', '添加子分类', 450, 280);">修改</a>
+							href="javascript:postDialog('editCategory', '<?php echo YUrl::createBackendUrl('', 'Category', 'edit', ['cat_id' => $cat['cat_id']]); ?>', '修改分类', 450, 280);">修改</a>
 							| <a
 							href="javascript:deleteDialog('deleteCategory', '<?php echo YUrl::createBackendUrl('', 'Category', 'delete', ['cat_id' => $cat['cat_id']]); ?>', '<?php echo $cat['cat_name']; ?>');">删除</a>
 						</td>

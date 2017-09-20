@@ -6,7 +6,7 @@ require_once (APP_VIEW_PATH . DIRECTORY_SEPARATOR . 'common/header.php');
 <div class="subnav">
 	<div class="content-menu ib-a blue line-x">
 		<a class="add fb"
-			href="javascript:postDialog('addNavbar', '<?php echo YUrl::createBackendUrl('', 'Page', 'navbarAdd'); ?>', '添加分类', 400, 250)"><em>添加导航</em></a>
+			href="javascript:postDialog('addNavbar', '<?php echo YUrl::createBackendUrl('', 'Page', 'navbarAdd'); ?>', '添加导航', 400, 250)"><em>添加导航</em></a>
 		<a href='javascript:;' class="on"><em>导航列表</em></a>
 	</div>
 </div>
